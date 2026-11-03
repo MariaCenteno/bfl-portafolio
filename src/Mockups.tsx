@@ -58,7 +58,7 @@ function Title({ children }: { children: ReactNode }) {
   return <p className="mb-3 text-xs font-bold text-primary">{children}</p>;
 }
 
-function Sofi() {
+function Kids() {
   return (
     <Frame url="gastos-de-hija.app">
       <div className="grid grid-cols-3 gap-2">
@@ -83,7 +83,7 @@ function Sofi() {
   );
 }
 
-function Oso() {
+function Home() {
   return (
     <div className="mx-auto max-w-[300px]">
       <div className="overflow-hidden rounded-[2rem] border-[6px] border-primary bg-card shadow-[0_30px_60px_-30px_oklch(0.27_0.08_255/0.45)]">
@@ -123,7 +123,7 @@ function Oso() {
   );
 }
 
-function SofiA() {
+function PersonalHub() {
   const nav = ["Dashboard", "Gastos", "Ingresos", "Presupuesto", "Deudas", "Ahorros", "Impuestos", "Calendario"];
   return (
     <Frame url="finance-hub.app/dashboard">
@@ -178,7 +178,7 @@ function SofiA() {
   );
 }
 
-function HatoMac() {
+function Vet() {
   return (
     <Frame url="veterinaria.app/inventario">
       <div className="mb-3 flex flex-wrap gap-2 text-[11px]">
@@ -220,7 +220,7 @@ function HatoMac() {
   );
 }
 
-function Effeta() {
+function Rentals() {
   return (
     <Frame url="mis-finanzas.app">
       <div className="mb-3 flex flex-wrap gap-2 text-[11px]">
@@ -255,9 +255,9 @@ function Effeta() {
 }
 
 export const mockups: Record<ProjectId, () => ReactNode> = {
-  sofi: Sofi,
-  oso: Oso,
-  sofia: SofiA,
-  hatomac: HatoMac,
-  effeta: Effeta,
+  hijos: Kids,
+  hogar: Home,
+  personal: PersonalHub,
+  veterinaria: Vet,
+  rentas: Rentals,
 };

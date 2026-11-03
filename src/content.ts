@@ -1,5 +1,5 @@
 export type Lang = "es" | "en";
-export type ProjectId = "sofi" | "oso" | "sofia" | "hatomac" | "effeta";
+export type ProjectId = "hijos" | "hogar" | "personal" | "veterinaria" | "rentas";
 
 export const CONTACT_EMAIL = "info@blueflab.co";
 export const MAIN_SITE = { es: "https://blueflab.co", en: "https://blueflab.co/en" };
@@ -47,9 +47,9 @@ export const content: Record<Lang, Content> = {
     },
     projects: [
       {
-        id: "sofi",
-        name: "Sofi Balance Tracker",
-        kind: "Gastos compartidos",
+        id: "hijos",
+        name: "Gastos de los hijos",
+        kind: "Familia",
         tagline: "Los gastos de una hija, claros para mamá y papá.",
         problem:
           "Dos padres separados comparten los gastos de su hija. Uno paga casi todo en el mes y al final se hacía la cuenta a mano en una hoja de cálculo.",
@@ -65,9 +65,9 @@ export const content: Record<Lang, Content> = {
         stack: ["React", "Supabase", "Recharts"],
       },
       {
-        id: "oso",
-        name: "Oso Balance",
-        kind: "Finanzas del hogar",
+        id: "hogar",
+        name: "Balance del hogar",
+        kind: "Hogar",
         tagline: "Quién le debe a quién, sin hacer cuentas.",
         problem:
           "Dos personas comparten casa y gastos. Anotar todo y calcular el balance a mano tomaba tiempo y generaba dudas.",
@@ -83,9 +83,9 @@ export const content: Record<Lang, Content> = {
         stack: ["React", "Supabase", "Recharts", "jsPDF"],
       },
       {
-        id: "sofia",
-        name: "SofiA Finance Hub",
-        kind: "Finanzas personales",
+        id: "personal",
+        name: "Centro de finanzas personales",
+        kind: "Personal",
         tagline: "Todas las finanzas personales en un solo lugar.",
         problem:
           "Las finanzas personales vivían en un Excel grande: gastos, ingresos, deudas, ahorros e impuestos en pestañas separadas.",
@@ -95,15 +95,15 @@ export const content: Record<Lang, Content> = {
           "Gastos, ingresos y presupuesto mensual",
           "Deudas, ahorros, impuestos y proyectos",
           "Calendario de pagos",
-          "Se conecta con Oso Balance y Sofi Balance Tracker",
+          "Trae datos de otras apps, como la del hogar",
           "IA que sugiere categorías y da recomendaciones",
         ],
         stack: ["TanStack Start", "Supabase", "IA", "Recharts"],
       },
       {
-        id: "hatomac",
-        name: "HatoMac",
-        kind: "Negocio · Veterinaria",
+        id: "veterinaria",
+        name: "Gestión de veterinaria",
+        kind: "Negocio",
         tagline: "Inventario, ventas y clínica de una veterinaria.",
         problem:
           "Una veterinaria manejaba su inventario en hojas de cálculo. No sabía qué productos se vencían ni cuánto ganaba por cada venta.",
@@ -120,9 +120,9 @@ export const content: Record<Lang, Content> = {
         stack: ["TanStack Start", "Supabase", "PostgreSQL"],
       },
       {
-        id: "effeta",
-        name: "Effetá",
-        kind: "Finanzas personales",
+        id: "rentas",
+        name: "Ingresos y rentas",
+        kind: "Personal",
         tagline: "Salario, rentas y préstamos bajo control.",
         problem:
           "Una persona con varias fuentes de ingreso (salario, arriendos, motos, préstamos) llevaba todo en notas sueltas.",
@@ -162,9 +162,9 @@ export const content: Record<Lang, Content> = {
     },
     projects: [
       {
-        id: "sofi",
-        name: "Sofi Balance Tracker",
-        kind: "Shared expenses",
+        id: "hijos",
+        name: "Kids' Expenses",
+        kind: "Family",
         tagline: "A child's expenses, clear for both parents.",
         problem:
           "Two separated parents share their daughter's expenses. One pays most of the month, and the final count was done by hand in a spreadsheet.",
@@ -179,9 +179,9 @@ export const content: Record<Lang, Content> = {
         stack: ["React", "Supabase", "Recharts"],
       },
       {
-        id: "oso",
-        name: "Oso Balance",
-        kind: "Household finances",
+        id: "hogar",
+        name: "Household Balance",
+        kind: "Home",
         tagline: "Who owes whom, no math needed.",
         problem:
           "Two people share a home and its costs. Writing everything down and working out the balance by hand took time and caused doubts.",
@@ -196,9 +196,9 @@ export const content: Record<Lang, Content> = {
         stack: ["React", "Supabase", "Recharts", "jsPDF"],
       },
       {
-        id: "sofia",
-        name: "SofiA Finance Hub",
-        kind: "Personal finances",
+        id: "personal",
+        name: "Personal Finance Hub",
+        kind: "Personal",
         tagline: "All your personal finances in one place.",
         problem:
           "Personal finances lived in one big spreadsheet: expenses, income, debts, savings and taxes on separate tabs.",
@@ -207,15 +207,15 @@ export const content: Record<Lang, Content> = {
           "Expenses, income and monthly budget",
           "Debts, savings, taxes and projects",
           "Payment calendar",
-          "Connects to Oso Balance and Sofi Balance Tracker",
+          "Pulls data from other apps, like the household one",
           "AI that suggests categories and gives insights",
         ],
         stack: ["TanStack Start", "Supabase", "AI", "Recharts"],
       },
       {
-        id: "hatomac",
-        name: "HatoMac",
-        kind: "Business · Vet clinic",
+        id: "veterinaria",
+        name: "Vet Clinic Manager",
+        kind: "Business",
         tagline: "Inventory, sales and clinic for a vet shop.",
         problem:
           "A vet clinic ran its inventory on spreadsheets. It didn't know which products were expiring or how much it made on each sale.",
@@ -231,9 +231,9 @@ export const content: Record<Lang, Content> = {
         stack: ["TanStack Start", "Supabase", "PostgreSQL"],
       },
       {
-        id: "effeta",
-        name: "Effetá",
-        kind: "Personal finances",
+        id: "rentas",
+        name: "Income & Rentals",
+        kind: "Personal",
         tagline: "Salary, rentals and loans under control.",
         problem:
           "Someone with several income sources (salary, house rent, motorbikes, loans) tracked it all in loose notes.",
