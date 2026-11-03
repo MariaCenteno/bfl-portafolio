@@ -54,7 +54,7 @@ export const content: Record<Lang, Content> = {
         problem:
           "Dos padres separados comparten los gastos de su hija. Uno paga casi todo en el mes y al final se hacía la cuenta a mano en una hoja de cálculo.",
         solution:
-          "Un tablero donde los dos ven cada gasto apenas pasa, con el saldo pendiente calculado solo.",
+          "Un tablero donde ambos ven los gastos al momento y la app calcula cuánto debe cada uno.",
         features: [
           "Registro de gastos y pagos con categoría",
           "Saldo pendiente automático entre los dos",
@@ -168,7 +168,7 @@ export const content: Record<Lang, Content> = {
         tagline: "A child's expenses, clear for both parents.",
         problem:
           "Two separated parents share their daughter's expenses. One pays most of the month, and the final count was done by hand in a spreadsheet.",
-        solution: "A dashboard where both see each expense as it happens, with the balance due calculated for them.",
+        solution: "A dashboard where both parents see expenses in real time, and the app works out who owes what.",
         features: [
           "Log expenses and payments by category",
           "Automatic balance due between both parents",
