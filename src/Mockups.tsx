@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { ProjectId } from "./content";
+import type { Lang, ProjectId } from "./content";
 
 /* Sample-data previews of each app. All names and numbers are made up. */
 
@@ -58,46 +58,75 @@ function Title({ children }: { children: ReactNode }) {
   return <p className="mb-3 text-xs font-bold text-primary">{children}</p>;
 }
 
-function Kids() {
+type P = { lang: Lang };
+
+function useT(lang: Lang) {
+  const t = (es: string, en: string) => (lang === "es" ? es : en);
+  const money = (n: number) => "$" + n.toLocaleString(lang === "es" ? "es-CO" : "en-US");
+  return { t, money };
+}
+
+function Pills({ items, active }: { items: string[]; active: number }) {
   return (
-    <Frame url="gastos-de-hijos.app">
+    <div className="mb-3 flex flex-wrap gap-2 text-[11px]">
+      {items.map((x, i) => (
+        <span
+          key={x}
+          className={`rounded-full px-3 py-1 ${i === active ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
+        >
+          {x}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function Kids({ lang }: P) {
+  const { t, money } = useT(lang);
+  return (
+    <Frame url={t("gastos-de-hijos.app", "kids-expenses.app")}>
       <div className="grid grid-cols-3 gap-2">
-        <Stat label="Gastos del mes" value="$2.840.000" />
-        <Stat label="Pagos" value="$1.200.000" tone="muted" />
-        <Stat label="Saldo pendiente" value="$220.000" tone="teal" />
+        <Stat label={t("Gastos del mes", "This month")} value={money(2840000)} />
+        <Stat label={t("Pagos", "Payments")} value={money(1200000)} tone="muted" />
+        <Stat label={t("Saldo pendiente", "Balance due")} value={money(220000)} tone="teal" />
       </div>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
-          <Title>Tendencia mensual</Title>
-          <Bars values={[2.1, 2.4, 1.9, 2.6, 2.3, 2.84]} labels={["May", "Jun", "Jul", "Ago", "Sep", "Oct"]} />
+          <Title>{t("Tendencia mensual", "Monthly trend")}</Title>
+          <Bars
+            values={[2.1, 2.4, 1.9, 2.6, 2.3, 2.84]}
+            labels={lang === "es" ? ["May", "Jun", "Jul", "Ago", "Sep", "Oct"] : ["May", "Jun", "Jul", "Aug", "Sep", "Oct"]}
+          />
         </div>
         <div>
-          <Title>Últimos gastos</Title>
-          <Row a="Pensión colegio" b="Educación" c="$950.000" />
-          <Row a="Clases de natación" b="Deporte" c="$180.000" />
-          <Row a="Cita pediatra" b="Salud" c="$120.000" />
-          <Row a="Uniformes" b="Ropa" c="$210.000" />
+          <Title>{t("Últimos gastos", "Latest expenses")}</Title>
+          <Row a={t("Pensión colegio", "School fees")} b={t("Educación", "Education")} c={money(950000)} />
+          <Row a={t("Clases de natación", "Swim lessons")} b={t("Deporte", "Sports")} c={money(180000)} />
+          <Row a={t("Cita pediatra", "Pediatrician")} b={t("Salud", "Health")} c={money(120000)} />
+          <Row a={t("Uniformes", "Uniforms")} b={t("Ropa", "Clothes")} c={money(210000)} />
         </div>
       </div>
     </Frame>
   );
 }
 
-function Home() {
+function Home({ lang }: P) {
+  const { t, money } = useT(lang);
+  const cats = lang === "es" ? ["Mercado", "Servicios", "Arriendo", "Mascota"] : ["Groceries", "Utilities", "Rent", "Pet"];
   return (
     <div className="mx-auto max-w-[300px]">
       <div className="overflow-hidden rounded-[2rem] border-[6px] border-primary bg-card shadow-[0_30px_60px_-30px_oklch(0.27_0.08_255/0.45)]">
         <div className="space-y-3 p-4">
           <div className="rounded-2xl bg-primary p-4 text-primary-foreground">
-            <p className="text-[10px] uppercase tracking-wider opacity-70">Balance de octubre</p>
-            <p className="mt-1 text-2xl font-bold tabular-nums">$345.500</p>
-            <p className="mt-1 text-xs opacity-80">Ana le debe a Laura</p>
+            <p className="text-[10px] uppercase tracking-wider opacity-70">{t("Balance de octubre", "October balance")}</p>
+            <p className="mt-1 text-2xl font-bold tabular-nums">{money(345500)}</p>
+            <p className="mt-1 text-xs opacity-80">{t("Ana le debe a Laura", "Ana owes Laura")}</p>
           </div>
           <div className="rounded-2xl border border-border p-3">
-            <p className="mb-2 text-xs font-bold text-primary">Gasto rápido</p>
-            <div className="rounded-lg border border-border px-3 py-2 text-xs text-muted-foreground">$ 84.000</div>
+            <p className="mb-2 text-xs font-bold text-primary">{t("Gasto rápido", "Quick expense")}</p>
+            <div className="rounded-lg border border-border px-3 py-2 text-xs text-muted-foreground">{money(84000)}</div>
             <div className="mt-2 flex flex-wrap gap-1.5">
-              {["Mercado", "Servicios", "Arriendo", "Mascota"].map((c, i) => (
+              {cats.map((c, i) => (
                 <span
                   key={c}
                   className={`rounded-full px-2.5 py-1 text-[10px] ${i === 0 ? "bg-secondary text-secondary-foreground" : "bg-muted text-muted-foreground"}`}
@@ -107,15 +136,17 @@ function Home() {
               ))}
             </div>
             <div className="mt-2 flex gap-1.5 text-[10px]">
-              <span className="flex-1 rounded-lg bg-accent py-1.5 text-center text-accent-foreground">Compartido</span>
+              <span className="flex-1 rounded-lg bg-accent py-1.5 text-center text-accent-foreground">{t("Compartido", "Shared")}</span>
               <span className="flex-1 rounded-lg bg-muted py-1.5 text-center text-muted-foreground">Personal</span>
             </div>
-            <div className="mt-3 rounded-full bg-primary py-2 text-center text-xs font-medium text-primary-foreground">Guardar</div>
+            <div className="mt-3 rounded-full bg-primary py-2 text-center text-xs font-medium text-primary-foreground">
+              {t("Guardar", "Save")}
+            </div>
           </div>
           <div>
-            <Row a="Mercado semanal" b="50/50" c="$84.000" />
-            <Row a="Internet" b="50/50" c="$95.000" />
-            <Row a="USD Netflix" b="TRM" c="$41.000" />
+            <Row a={t("Mercado semanal", "Weekly groceries")} b="50/50" c={money(84000)} />
+            <Row a="Internet" b="50/50" c={money(95000)} />
+            <Row a="Netflix (USD)" b={t("TRM", "FX rate")} c={money(41000)} />
           </div>
         </div>
       </div>
@@ -123,8 +154,18 @@ function Home() {
   );
 }
 
-function PersonalHub() {
-  const nav = ["Dashboard", "Gastos", "Ingresos", "Presupuesto", "Deudas", "Ahorros", "Impuestos", "Calendario"];
+function PersonalHub({ lang }: P) {
+  const { t } = useT(lang);
+  const nav =
+    lang === "es"
+      ? ["Dashboard", "Gastos", "Ingresos", "Presupuesto", "Deudas", "Ahorros", "Impuestos", "Calendario"]
+      : ["Dashboard", "Expenses", "Income", "Budget", "Debts", "Savings", "Taxes", "Calendar"];
+  const budget: [string, number][] = [
+    [t("Vivienda", "Housing"), 92],
+    [t("Mercado", "Groceries"), 74],
+    [t("Transporte", "Transport"), 58],
+    [t("Restaurantes", "Restaurants"), 118],
+  ];
   return (
     <Frame url="finance-hub.app/dashboard">
       <div className="flex gap-4">
@@ -140,33 +181,31 @@ function PersonalHub() {
         </div>
         <div className="min-w-0 flex-1 space-y-3">
           <div className="grid grid-cols-3 gap-2">
-            <Stat label="Ingresos" value="$9,4M" />
-            <Stat label="Gastos" value="$6,1M" tone="muted" />
-            <Stat label="Ahorro" value="35%" tone="teal" />
+            <Stat label={t("Ingresos", "Income")} value={t("$9,4M", "$9.4M")} />
+            <Stat label={t("Gastos", "Expenses")} value={t("$6,1M", "$6.1M")} tone="muted" />
+            <Stat label={t("Ahorro", "Savings")} value="35%" tone="teal" />
           </div>
           <div className="rounded-xl border border-secondary/40 bg-accent p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-secondary">✦ Idea de la IA</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-secondary">✦ {t("Idea de la IA", "AI insight")}</p>
             <p className="mt-1 text-xs text-accent-foreground">
-              Este mes gastaste 18% más en restaurantes. Si vuelves al promedio, llegas a tu meta de ahorro en marzo.
+              {t(
+                "Este mes gastaste 18% más en restaurantes. Si vuelves al promedio, llegas a tu meta de ahorro en marzo.",
+                "You spent 18% more on restaurants this month. Back to your average, you reach your savings goal in March.",
+              )}
             </p>
           </div>
           <div>
-            <Title>Presupuesto vs. real</Title>
-            {[
-              ["Vivienda", 92],
-              ["Mercado", 74],
-              ["Transporte", 58],
-              ["Restaurantes", 118],
-            ].map(([k, v]) => (
-              <div key={k as string} className="mb-2">
+            <Title>{t("Presupuesto vs. real", "Budget vs. actual")}</Title>
+            {budget.map(([k, v]) => (
+              <div key={k} className="mb-2">
                 <div className="mb-1 flex justify-between text-[11px]">
                   <span className="text-primary">{k}</span>
                   <span className="tabular-nums text-muted-foreground">{v}%</span>
                 </div>
                 <div className="h-1.5 rounded-full bg-muted">
                   <div
-                    className={`h-1.5 rounded-full ${(v as number) > 100 ? "bg-destructive" : "bg-secondary"}`}
-                    style={{ width: `${Math.min(v as number, 100)}%` }}
+                    className={`h-1.5 rounded-full ${v > 100 ? "bg-destructive" : "bg-secondary"}`}
+                    style={{ width: `${Math.min(v, 100)}%` }}
                   />
                 </div>
               </div>
@@ -178,34 +217,39 @@ function PersonalHub() {
   );
 }
 
-function Vet() {
-  return (
-    <Frame url="veterinaria.app/inventario">
-      <div className="mb-3 flex flex-wrap gap-2 text-[11px]">
-        {["Hoy", "Inventario", "Venta", "Clínica", "Reportes"].map((t, i) => (
-          <span
-            key={t}
-            className={`rounded-full px-3 py-1 ${i === 1 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
-          >
-            {t}
-          </span>
-        ))}
-      </div>
-      <div className="mb-3 rounded-xl border border-destructive/30 bg-destructive/5 p-3 text-xs text-primary">
-        <span className="font-bold text-destructive">3 lotes</span> se vencen en los próximos 30 días
-      </div>
-      <div className="overflow-hidden rounded-xl border border-border">
-        <div className="grid grid-cols-[1fr_auto_auto] gap-3 bg-muted px-3 py-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-          <span>Producto</span>
-          <span>Lote · Vence</span>
-          <span className="text-right">Stock</span>
-        </div>
-        {[
+function Vet({ lang }: P) {
+  const { t } = useT(lang);
+  const rows =
+    lang === "es"
+      ? [
           ["Desparasitante 10 kg", "MED-0012", "L-224 · mar 27", "38"],
           ["Vacuna triple felina", "VAC-0004", "L-091 · dic 26", "6"],
           ["Alimento cachorro 4 kg", "ALI-0031", "Sin lote · ago 27", "22"],
           ["Shampoo antipulgas", "HIG-0008", "L-310 · ene 28", "15"],
-        ].map(([n, sku, lot, s], i) => (
+        ]
+      : [
+          ["Dewormer 10 kg", "MED-0012", "L-224 · Mar 27", "38"],
+          ["Feline triple vaccine", "VAC-0004", "L-091 · Dec 26", "6"],
+          ["Puppy food 4 kg", "ALI-0031", "No batch · Aug 27", "22"],
+          ["Flea shampoo", "HIG-0008", "L-310 · Jan 28", "15"],
+        ];
+  return (
+    <Frame url={t("veterinaria.app/inventario", "vetclinic.app/inventory")}>
+      <Pills
+        items={lang === "es" ? ["Hoy", "Inventario", "Venta", "Clínica", "Reportes"] : ["Today", "Inventory", "Sale", "Clinic", "Reports"]}
+        active={1}
+      />
+      <div className="mb-3 rounded-xl border border-destructive/30 bg-destructive/5 p-3 text-xs text-primary">
+        <span className="font-bold text-destructive">{t("3 lotes", "3 batches")}</span>{" "}
+        {t("se vencen en los próximos 30 días", "expire in the next 30 days")}
+      </div>
+      <div className="overflow-hidden rounded-xl border border-border">
+        <div className="grid grid-cols-[1fr_auto_auto] gap-3 bg-muted px-3 py-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+          <span>{t("Producto", "Product")}</span>
+          <span>{t("Lote · Vence", "Batch · Expires")}</span>
+          <span className="text-right">Stock</span>
+        </div>
+        {rows.map(([n, sku, lot, s], i) => (
           <div key={sku} className="grid grid-cols-[1fr_auto_auto] items-center gap-3 border-t border-border px-3 py-2 text-xs">
             <span className="min-w-0">
               <span className="block truncate text-primary">{n}</span>
@@ -220,41 +264,39 @@ function Vet() {
   );
 }
 
-function Rentals() {
+function Rentals({ lang }: P) {
+  const { t, money } = useT(lang);
   return (
-    <Frame url="mis-finanzas.app">
-      <div className="mb-3 flex flex-wrap gap-2 text-[11px]">
-        {["Resumen", "Salario", "Rentas", "Préstamos", "Egresos"].map((t, i) => (
-          <span
-            key={t}
-            className={`rounded-full px-3 py-1 ${i === 0 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
-          >
-            {t}
-          </span>
-        ))}
-      </div>
+    <Frame url={t("mis-finanzas.app", "my-finances.app")}>
+      <Pills
+        items={lang === "es" ? ["Resumen", "Salario", "Rentas", "Préstamos", "Egresos"] : ["Summary", "Salary", "Rentals", "Loans", "Spending"]}
+        active={0}
+      />
       <div className="grid grid-cols-3 gap-2">
-        <Stat label="Ingresos" value="$5.661.000" />
-        <Stat label="Egresos" value="$3.240.000" tone="muted" />
-        <Stat label="Balance" value="$2.421.000" tone="teal" />
+        <Stat label={t("Ingresos", "Income")} value={money(5661000)} />
+        <Stat label={t("Egresos", "Spending")} value={money(3240000)} tone="muted" />
+        <Stat label="Balance" value={money(2421000)} tone="teal" />
       </div>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
-          <Title>Ingresos por fuente</Title>
-          <Bars values={[3.9, 1.65, 0.111]} labels={["Salario", "Rentas", "Préstamos"]} />
+          <Title>{t("Ingresos por fuente", "Income by source")}</Title>
+          <Bars
+            values={[3.9, 1.65, 0.111]}
+            labels={lang === "es" ? ["Salario", "Rentas", "Préstamos"] : ["Salary", "Rentals", "Loans"]}
+          />
         </div>
         <div>
-          <Title>Préstamos activos</Title>
-          <Row a="Carlos" b="3% mes" c="$2.500.000" strong />
-          <Row a="Marta" b="3% mes" c="$1.200.000" strong />
-          <Row a="Intereses" b="Automático" c="$111.000" />
+          <Title>{t("Préstamos activos", "Active loans")}</Title>
+          <Row a="Carlos" b={t("3% mes", "3% / mo")} c={money(2500000)} strong />
+          <Row a="Marta" b={t("3% mes", "3% / mo")} c={money(1200000)} strong />
+          <Row a={t("Intereses", "Interest")} b={t("Automático", "Automatic")} c={money(111000)} />
         </div>
       </div>
     </Frame>
   );
 }
 
-export const mockups: Record<ProjectId, () => ReactNode> = {
+export const mockups: Record<ProjectId, (p: P) => ReactNode> = {
   hijos: Kids,
   hogar: Home,
   personal: PersonalHub,

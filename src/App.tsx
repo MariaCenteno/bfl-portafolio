@@ -49,6 +49,14 @@ export default function App({ lang }: { lang: Lang }) {
     document.documentElement.lang = lang;
   }, [lang, t.meta.title]);
 
+  // Follow #links changed by the browser (back/forward, pasted link).
+  useEffect(() => {
+    const onHash = () => setActive(initialTab(ids));
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Keep the active tab visible when the tab row scrolls sideways (mobile).
   useEffect(() => {
     const el = tabRefs.current[active];
@@ -185,7 +193,7 @@ export default function App({ lang }: { lang: Lang }) {
             </div>
 
             <figure>
-              <Mockup />
+              <Mockup lang={lang} />
               <figcaption className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
                 <Diamond className="size-1.5" /> {t.labels.preview}
               </figcaption>
