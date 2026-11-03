@@ -35,7 +35,7 @@ function Bars({ values, labels }: { values: number[]; labels: string[] }) {
         <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
           <div
             className={`w-full rounded-t-md ${i === values.length - 1 ? "bg-secondary" : "bg-primary/80"}`}
-            style={{ height: `${(v / max) * 88}px` }}
+            style={{ height: `${Math.max((v / max) * 88, 8)}px` }}
           />
           <span className="text-[10px] text-muted-foreground">{labels[i]}</span>
         </div>
@@ -224,7 +224,7 @@ function Rentals() {
   return (
     <Frame url="mis-finanzas.app">
       <div className="mb-3 flex flex-wrap gap-2 text-[11px]">
-        {["Resumen", "Salario", "Casa", "Motos", "Préstamos", "Egresos"].map((t, i) => (
+        {["Resumen", "Salario", "Rentas", "Préstamos", "Egresos"].map((t, i) => (
           <span
             key={t}
             className={`rounded-full px-3 py-1 ${i === 0 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
@@ -234,20 +234,20 @@ function Rentals() {
         ))}
       </div>
       <div className="grid grid-cols-3 gap-2">
-        <Stat label="Ingresos" value="$7.250.000" />
-        <Stat label="Egresos" value="$4.180.000" tone="muted" />
-        <Stat label="Balance" value="$3.070.000" tone="teal" />
+        <Stat label="Ingresos" value="$5.661.000" />
+        <Stat label="Egresos" value="$3.240.000" tone="muted" />
+        <Stat label="Balance" value="$2.421.000" tone="teal" />
       </div>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
           <Title>Ingresos por fuente</Title>
-          <Bars values={[4.2, 1.6, 0.9, 0.55]} labels={["Salario", "Casa", "Motos", "Préstamos"]} />
+          <Bars values={[3.9, 1.65, 0.111]} labels={["Salario", "Rentas", "Préstamos"]} />
         </div>
         <div>
           <Title>Préstamos activos</Title>
-          <Row a="Préstamo a Carlos" b="Interés mensual" c="$1.500.000" strong />
-          <Row a="Préstamo a Marta" b="Interés mensual" c="$800.000" strong />
-          <Row a="Intereses del mes" b="Automático" c="$92.000" />
+          <Row a="Carlos" b="3% mes" c="$2.500.000" strong />
+          <Row a="Marta" b="3% mes" c="$1.200.000" strong />
+          <Row a="Intereses" b="Automático" c="$111.000" />
         </div>
       </div>
     </Frame>

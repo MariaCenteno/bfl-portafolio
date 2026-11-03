@@ -125,13 +125,13 @@ export const content: Record<Lang, Content> = {
         kind: "Personal",
         tagline: "Salario, rentas y préstamos bajo control.",
         problem:
-          "Una persona con varias fuentes de ingreso (salario, arriendos, motos, préstamos) llevaba todo en notas sueltas.",
+          "Una persona con varias fuentes de ingreso (salario, rentas, préstamos) llevaba todo en notas sueltas.",
         solution:
           "Una app simple, en pesos, con una sección para cada fuente de dinero y un resumen del mes.",
         features: [
           "Resumen del mes: ingresos, gastos y balance",
-          "Secciones para salario, casa, motos y préstamos",
-          "Interés de préstamos calculado solo",
+          "Secciones para salario, rentas y préstamos",
+          "La app calcula el interés de cada préstamo",
           "Todos los movimientos en un solo lugar",
         ],
         stack: ["TanStack Start", "Supabase"],
@@ -236,12 +236,12 @@ export const content: Record<Lang, Content> = {
         kind: "Personal",
         tagline: "Salary, rentals and loans under control.",
         problem:
-          "Someone with several income sources (salary, house rent, motorbikes, loans) tracked it all in loose notes.",
+          "Someone with several income sources (salary, rentals, loans) tracked it all in loose notes.",
         solution: "A simple app, in pesos, with a section for each money source and a monthly summary.",
         features: [
           "Monthly summary: income, expenses and balance",
-          "Sections for salary, house, motorbikes and loans",
-          "Loan interest calculated automatically",
+          "Sections for salary, rentals and loans",
+          "The app works out the interest on each loan",
           "Every transaction in one place",
         ],
         stack: ["TanStack Start", "Supabase"],
