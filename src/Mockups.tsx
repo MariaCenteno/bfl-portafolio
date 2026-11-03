@@ -60,7 +60,7 @@ function Title({ children }: { children: ReactNode }) {
 
 function Kids() {
   return (
-    <Frame url="gastos-de-hija.app">
+    <Frame url="gastos-de-hijos.app">
       <div className="grid grid-cols-3 gap-2">
         <Stat label="Gastos del mes" value="$2.840.000" />
         <Stat label="Pagos" value="$1.200.000" tone="muted" />

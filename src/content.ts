@@ -50,9 +50,9 @@ export const content: Record<Lang, Content> = {
         id: "hijos",
         name: "Gastos de los hijos",
         kind: "Familia",
-        tagline: "Los gastos de una hija, claros para mamá y papá.",
+        tagline: "Los gastos de los hijos, claros para mamá y papá.",
         problem:
-          "Dos padres separados comparten los gastos de su hija. Uno paga casi todo en el mes y al final se hacía la cuenta a mano en una hoja de cálculo.",
+          "Dos padres separados comparten los gastos de sus hijos. Uno paga casi todo en el mes y al final se hacía la cuenta a mano en una hoja de cálculo.",
         solution:
           "Un tablero donde ambos ven los gastos al momento y la app calcula cuánto debe cada uno.",
         features: [
@@ -165,9 +165,9 @@ export const content: Record<Lang, Content> = {
         id: "hijos",
         name: "Kids' Expenses",
         kind: "Family",
-        tagline: "A child's expenses, clear for both parents.",
+        tagline: "Kids' expenses, clear for both parents.",
         problem:
-          "Two separated parents share their daughter's expenses. One pays most of the month, and the final count was done by hand in a spreadsheet.",
+          "Two separated parents share their kids' expenses. One pays most of the month, and the final count was done by hand in a spreadsheet.",
         solution: "A dashboard where both parents see expenses in real time, and the app works out who owes what.",
         features: [
           "Log expenses and payments by category",
