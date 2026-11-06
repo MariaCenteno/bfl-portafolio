@@ -34,7 +34,9 @@ function LangSwitch({ lang }: { lang: Lang }) {
 }
 
 function initialTab(ids: ProjectId[]): ProjectId {
-  const h = window.location.hash.slice(1) as ProjectId;
+  // Old link #veterinaria now points to the generic business tab.
+  const raw = window.location.hash.slice(1);
+  const h = (raw === "veterinaria" ? "negocio" : raw) as ProjectId;
   return ids.includes(h) ? h : ids[0];
 }
 

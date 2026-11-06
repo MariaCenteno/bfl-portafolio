@@ -234,9 +234,12 @@ function Vet({ lang }: P) {
           ["Flea shampoo", "HIG-0008", "L-310 · Jan 28", "15"],
         ];
   return (
-    <Frame url={t("veterinaria.app/inventario", "vetclinic.app/inventory")}>
+    <Frame url={t("mi-negocio.app/inventario", "my-business.app/inventory")}>
+      <p className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-secondary/40 bg-accent px-2.5 py-1 text-[10px] font-medium text-accent-foreground">
+        {t("Ejemplo: veterinaria", "Example: vet clinic")}
+      </p>
       <Pills
-        items={lang === "es" ? ["Hoy", "Inventario", "Venta", "Clínica", "Reportes"] : ["Today", "Inventory", "Sale", "Clinic", "Reports"]}
+        items={lang === "es" ? ["Hoy", "Inventario", "Ventas", "Citas", "Reportes"] : ["Today", "Inventory", "Sales", "Appointments", "Reports"]}
         active={1}
       />
       <div className="mb-3 rounded-xl border border-destructive/30 bg-destructive/5 p-3 text-xs text-primary">
@@ -300,6 +303,6 @@ export const mockups: Record<ProjectId, (p: P) => ReactNode> = {
   hijos: Kids,
   hogar: Home,
   personal: PersonalHub,
-  veterinaria: Vet,
+  negocio: Vet,
   rentas: Rentals,
 };

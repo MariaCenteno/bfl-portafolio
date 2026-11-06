@@ -1,5 +1,5 @@
 export type Lang = "es" | "en";
-export type ProjectId = "hijos" | "hogar" | "personal" | "veterinaria" | "rentas";
+export type ProjectId = "hijos" | "hogar" | "personal" | "negocio" | "rentas";
 
 export const CONTACT_EMAIL = "info@blueflab.co";
 export const MAIN_SITE = { es: "https://blueflab.co", en: "https://blueflab.co/en" };
@@ -101,20 +101,20 @@ export const content: Record<Lang, Content> = {
         stack: ["TanStack Start", "Supabase", "IA", "Recharts"],
       },
       {
-        id: "veterinaria",
-        name: "Gestión de veterinaria",
+        id: "negocio",
+        name: "Inventario y citas",
         kind: "Negocio",
-        tagline: "Inventario, ventas y clínica de una veterinaria.",
+        tagline: "Inventario, ventas y citas de un negocio, en un solo lugar.",
         problem:
-          "Una veterinaria manejaba su inventario en hojas de cálculo. No sabía qué productos se vencían ni cuánto ganaba por cada venta.",
+          "Muchos negocios pequeños llevan inventario y citas en hojas de cálculo. No saben qué productos se vencen ni cuánto ganan en cada venta.",
         solution:
-          "Un sistema que controla stock por lote, registra ventas y guarda la historia clínica de cada mascota.",
+          "Un sistema que controla el stock, registra ventas y guarda el historial de cada cliente. Sirve para tiendas, consultorios, salones o veterinarias.",
         features: [
           "Inventario por lote con fecha de vencimiento",
-          "SKU automático, sin que el equipo lo piense",
+          "SKU automático, sin trabajo extra para el equipo",
           "Ventas de varios productos en un solo paso",
-          "Mascotas, vacunas, cirugías y fórmulas",
-          "Reportes de rentabilidad (solo para la dueña)",
+          "Clientes, citas e historial de servicios",
+          "Reportes de rentabilidad (solo para el dueño)",
           "Carga masiva de productos desde CSV",
         ],
         stack: ["TanStack Start", "Supabase", "PostgreSQL"],
@@ -213,18 +213,19 @@ export const content: Record<Lang, Content> = {
         stack: ["TanStack Start", "Supabase", "AI", "Recharts"],
       },
       {
-        id: "veterinaria",
-        name: "Vet Clinic Manager",
+        id: "negocio",
+        name: "Inventory & Appointments",
         kind: "Business",
-        tagline: "Inventory, sales and clinic for a vet shop.",
+        tagline: "Inventory, sales and appointments for a business, in one place.",
         problem:
-          "A vet clinic ran its inventory on spreadsheets. It didn't know which products were expiring or how much it made on each sale.",
-        solution: "A system that tracks stock by batch, records sales and keeps each pet's medical history.",
+          "Many small businesses track inventory and appointments in spreadsheets. They don't know which products are expiring or how much they make on each sale.",
+        solution:
+          "A system that tracks stock, records sales and keeps each client's history. It works for shops, clinics, salons or vet offices.",
         features: [
           "Inventory by batch with expiry dates",
           "Automatic SKUs, no extra work for the team",
           "Multi-product sales in one step",
-          "Pets, vaccines, surgeries and prescriptions",
+          "Clients, appointments and service history",
           "Profit reports (owner only)",
           "Bulk product upload from CSV",
         ],

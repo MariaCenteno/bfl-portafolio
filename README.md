@@ -12,7 +12,7 @@ Español en `/` e inglés en `/en`.
 ## Reglas
 
 - Nombres genéricos por caso de uso. Nada de nombres reales de clientes, apps o personas.
-- Cada pestaña tiene su link: `#hijos`, `#hogar`, `#personal`, `#veterinaria`, `#rentas`.
+- Cada pestaña tiene su link: `#hijos`, `#hogar`, `#personal`, `#negocio`, `#rentas`.
 
 ## Comandos
 
